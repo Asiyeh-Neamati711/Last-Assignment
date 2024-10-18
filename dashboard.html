@@ -6,7 +6,6 @@
     <title>Book Catalog - Library Management System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css"> 
-    
 </head>
 <body>
     
@@ -14,7 +13,10 @@
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #758597;">
         <a class="navbar-brand text-white" href="index.html">Library Management System</a>
         <div class="notification-container">
-          
+            <button class="notification-button">
+                <span class="icon">🔔</span>
+                <span class="badge">3</span>
+            </button>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,180 +44,118 @@
                 </li>
                
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="Search book.html">Search </a>
+                    <a class="nav-link text-white" href="search.html">Search </a>
                 </li>
             </ul>
         </div>
     </nav>
-</head>
-
-<body>
     <style>
-        /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    
+        body {
             font-family: 'Times New Roman', Times, serif;
             text-align: center;
         text-decoration: underline
-        
-    
 }
 
-.dashboard-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.navbar {
+    background-color: #374785;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 }
 
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-header h2 {
-    color: #2c3e50;
-}
-
-/* Content Section */
-.content-section {
-    margin-bottom: 30px;
-}
-
-.content-section h3 {
-    color: #34495e;
-    margin-bottom: 10px;
-}
-
-/* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #34495e;
-    color: white;
-}
-
-/* Borrowed Books */
-span.overdue {
-    color: red;
-}
-
-span.not-overdue {
-    color: green;
-}
-
-button.renew-btn {
-    padding: 6px 12px;
-    background-color: #3498db;
-    color: white;
+.card {
     border: none;
-    cursor: pointer;
+    border-radius: 10px;
 }
 
-button.renew-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.card-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
-button.renew-btn:hover:enabled {
-    background-color: #2980b9;
+.list-group-item {
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    background-color: #ffffff;
 }
 
+.modal-content {
+    border-radius: 10px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #374785;
+    color: white;
+}
     </style>
-    
-    <!-- User Dashboard Container -->
-    <div class="dashboard-container">
-        <header>
-            <h2>User Dashboard</h2>
-        </header>
+  
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Borrowed Books Section -->
-            <div id="borrowed-books" class="content-section">
-                <h3>Borrowed Books</h3>
-                <table id="borrowed-books-table">
-                    <tr>
-                        <th>Book ID</th>
-                        <th>Title</th>
-                        <th>Due Date</th>
-                        <th>Status</th>
-                        <th>Renew</th>
-                    </tr>
-                    <!-- Example Borrowed Books -->
-                    <tr>
-                        <td>1</td>
-                        <td>Rich Dad Poor Dad</td>
-                        <td>2024-09-20</td>
-                        <td><span class="not-overdue">Not Overdue</span></td>
-                        <td><button class="renew-btn" onclick="renewBook(this)">Renew</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Kafka on the Shore</td>
-                        <td>2024-09-10</td>
-                        <td><span class="overdue">Overdue</span></td>
-                        <td><button class="renew-btn" disabled>Renew</button></td>
-                    </tr>
-                </table>
+    <div class="container mt-5">
+        <div class="dashboard-header text-center mb-4">
+            <h2>Welcome To Dashboard Part </h2>
+            <p>Track your current borrowed books, renew books, and view your borrowing history.</p>
+        </div>
+
+        <div class="row">
+            <!-- Current Borrowed Books Section -->
+            <div class="col-md-6">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4>Currently Borrowed Books</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul id="borrowedBooksList" class="list-group">
+                            <!-- Dynamic content: List of borrowed books -->
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- Borrowing History Section -->
-            <div id="borrowing-history" class="content-section">
-                <h3>Borrowing History</h3>
-                <table id="history-table">
-                    <tr>
-                        <th>Book ID</th>
-                        <th>Title</th>
-                        <th>Date Borrowed</th>
-                        <th>Date Returned</th>
-                    </tr>
-                    <!-- Example Borrowing History -->
-                    <tr>
-                        <td>3</td>
-                        <td>The Silent Patient</td>
-                        <td>2024-06-01</td>
-                        <td>2024-06-15</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>The goodbye Cat</td>
-                        <td>2024-07-10</td>
-                        <td>2024-07-24</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Again,but better</td>
-                        <td>2024-07-10</td>
-                        <td>2024-07-24</td>
-                    </tr>
-                </table>
+            <div class="col-md-6">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h4>Borrowing History</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul id="historyList" class="list-group">
+                            <!-- Dynamic content: Borrowing history -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Renew Books Modal -->
+        <div class="modal fade" id="renewModal" tabindex="-1" aria-labelledby="renewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="renewModalLabel">Renew Book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to renew this book?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmRenewBtn">Renew</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-     
+
     <footer class="bg-light text-center text-lg-start mt-5">
 
         <p>&copy; 2024 Library Management System. All rights reserved.</p>
 </footer>
 
-
-    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

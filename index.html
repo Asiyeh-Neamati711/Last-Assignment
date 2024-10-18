@@ -44,7 +44,7 @@
                 </li>
                
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="Search book.html">Search </a>
+                    <a class="nav-link text-white" href="search.html">Search </a>
                 </li>
             </ul>
         </div>
@@ -269,15 +269,14 @@
         const $next = document.querySelector('.next');
         const $prev = document.querySelector('.prev');
 
-        $next.addEventListener('click', () => {
+        $next.addEventListener('click',() =>{
             const items = document.querySelectorAll('.item');
             document.querySelector('.slide').appendChild(items[0]);
-        });
-
-        $prev.addEventListener('click', () => {
+        })
+        $prev.addEventListener('click',() =>{
             const items = document.querySelectorAll('.item');
-            document.querySelector('.slide').prepend(items[items.length - 1]);
-        });
+            document.querySelector('.slide').prepend(items[items.length-1]);
+        })
     </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
